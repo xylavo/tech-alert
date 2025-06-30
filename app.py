@@ -137,7 +137,7 @@ def scheduled_job():
 if __name__ == "__main__":
     try:
         scheduler = BackgroundScheduler(timezone='Asia/Seoul')
-        scheduler.add_job(scheduled_job, 'cron', hour=16, minute=00, second=0, timezone='Asia/Seoul')
+        scheduler.add_job(scheduled_job, 'cron', hour=6, minute=30, second=0, timezone='Asia/Seoul')
         scheduler.start()
         print("스케줄러가 시작되었습니다.")
         
