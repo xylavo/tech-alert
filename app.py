@@ -106,9 +106,10 @@ def scheduled_job():
         tools = [tool]
         
         prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are a helpful AI assistant that provides daily blockchain, AI and security tech news and updates. 
+            ("system", f"""You are a helpful AI assistant that provides daily blockchain, AI and security tech news and updates. 
             Search for the latest technology news and provide a concise summary of the most important developments.
              Please find and provide news or information that has occurred within the last 3 days.
+             today is {datetime.now().strftime('%Y-%m-%d')}.
              please answer in korean.
              """),
             ("human", "{input}"),
@@ -137,7 +138,7 @@ def scheduled_job():
 if __name__ == "__main__":
     try:
         scheduler = BackgroundScheduler(timezone='Asia/Seoul')
-        scheduler.add_job(scheduled_job, 'cron', hour=6, minute=30, second=0, timezone='Asia/Seoul')
+        scheduler.add_job(scheduled_job, 'cron', hour=6, minute=30, second=0, misfire_grace_time=60, timezone='Asia/Seoul')
         scheduler.start()
         print("스케줄러가 시작되었습니다.")
         
